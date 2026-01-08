@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import AdminLayout from "./admin/AdminLayout";
 import AdminDashboard from "./admin/pages/AdminDashboard";
@@ -23,11 +23,13 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AdminLayout />}>
+          <Route index element={<Navigate to="dashboard" />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="spaces" element={<ManageSpaces />} />
           <Route path="bookings" element={<ManageBookings />} />
           <Route path="users" element={<ManageUsers />} />
           <Route path="services" element={<ServiceRequests />} />
+
         </Route>
 
 
@@ -41,7 +43,7 @@ function App() {
           <Route path="activity-logs" element={<ActivityLogs />} />
           <Route path="notifications" element={<Notifications />} />
         </Route>
-        
+
       </Routes>
     </BrowserRouter>
   );
