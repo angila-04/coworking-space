@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "../admin.css";
+
 
 function ManageUsers() {
   // Dummy users
