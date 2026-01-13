@@ -12,7 +12,9 @@ const ServiceProviderLayout = () => {
           <Link to="/service-provider/tasks">Tasks</Link><br />
           <Link to="/service-provider/payments">Payments</Link><br />
           <Link to="/service-provider/reports">Reports</Link><br />
-          <Link to="/service-provider/notifications">Notifications</Link>
+          <Link to="/service-provider/notifications">Notifications</Link><br/>
+          <Link to="/service-provider/bookings">Bookings</Link>
+
         </nav>
       </aside>
 
