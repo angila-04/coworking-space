@@ -1,11 +1,15 @@
 from fastapi import FastAPI
-from routers import auth
+from database import engine, Base
+from routers.auth import router as auth_router
 
-app = FastAPI(title="Coworking Space API")
+Base.metadata.create_all(bind=engine)
 
-# Include Auth router
-app.include_router(auth.router)
+app = FastAPI()
+
 
 @app.get("/")
-def root():
-    return {"message": "Backend running successfully"}
+def home():
+    return {"status": "Backend running"}
+
+app.include_router(auth_router)
+
