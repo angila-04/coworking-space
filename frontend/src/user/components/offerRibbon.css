@@ -1,0 +1,23 @@
+.offer-ribbon {
+  background: #c81e1e;
+  color: white;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.offer-track {
+  display: inline-block;
+  padding: 8px 0;
+  animation: scroll-left 18s linear infinite;
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
