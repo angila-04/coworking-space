@@ -1,61 +1,50 @@
-# backend/routers/auth.py
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
 
-from fastapi import APIRouter
-from pydantic import BaseModel
+from database import SessionLocal
+from models import User
+from schemas import RegisterSchema, LoginSchema
 
-router = APIRouter(
-    prefix="/auth",
-    tags=["Authentication"]
-)
+router = APIRouter(prefix="/auth", tags=["Auth"])
 
-# ----------------------------
-# Request models
-# ----------------------------
-class RegisterRequest(BaseModel):
-    name: str
-    email: str
-    password: str
-    role: str  # "user", "provider", "admin"
+# DB dependency
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
-class LoginRequest(BaseModel):
-    email: str
-    password: str
-
-# ----------------------------
-# Register Endpoint
-# ----------------------------
+# REGISTER
 @router.post("/register")
-def register(data: RegisterRequest):
-    # Validate role
-    if data.role not in ["user", "provider", "admin"]:
-        return {"message": "Invalid role. Must be user, provider, or admin."}
+def register(data: RegisterSchema, db: Session = Depends(get_db)):
+    existing_user = db.query(User).filter(User.email == data.email).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email already exists")
 
-    # Dummy response (no database yet)
-    return {
-        "message": "Registration successful",
-        "role": data.role
-    }
+    new_user = User(
+        email=data.email,
+        password=data.password,  # ❌ plain text (temporary)
+        role=data.role
+    )
 
-# ----------------------------
-# Login Endpoint
-# ----------------------------
+    db.add(new_user)
+    db.commit()
+
+    return {"message": "Registered successfully"}
+
+# LOGIN
 @router.post("/login")
-def login(data: LoginRequest):
-    # Dummy login logic (no DB)
-    if data.email and data.password:
-        # Assign role based on email for demo purposes
-        email_lower = data.email.lower()
-        if "admin" in email_lower:
-            role = "admin"
-        elif "provider" in email_lower:
-            role = "provider"
-        else:
-            role = "user"
+def login(data: LoginSchema, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.email == data.email).first()
 
-        return {
-            "message": "Login successful",
-            "role": role
-        }
+    if not user:
+        raise HTTPException(status_code=400, detail="Invalid credentials")
 
-    # Invalid credentials
-    return {"message": "Invalid credentials"}
+    if user.password != data.password:
+        raise HTTPException(status_code=400, detail="Invalid credentials")
+
+    return {
+        "message": "Login successful",
+        "role": user.role
+    }
