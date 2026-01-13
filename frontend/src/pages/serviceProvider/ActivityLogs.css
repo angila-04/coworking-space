@@ -1,0 +1,38 @@
+.activity-log-container {
+  padding: 20px;
+}
+
+.activity-log-container h1 {
+  margin-bottom: 20px;
+}
+
+.activity-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.activity-table th,
+.activity-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.activity-table th {
+  background-color: #f4f4f4;
+}
+
+.activity-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.status.success {
+  color: green;
+  font-weight: bold;
+}
+
+.status.completed {
+  color: blue;
+  font-weight: bold;
+}

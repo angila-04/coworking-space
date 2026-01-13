@@ -11,12 +11,16 @@ import ServiceRequests from "./admin/pages/ServiceRequests";
 /* Service Provider imports  */
 import ServiceProviderLayout from "./layouts/ServiceProviderLayout";
 import Dashboard from "./pages/serviceProvider/Dashboard";
+import AddSpace from "./pages/serviceProvider/AddSpace";
 import PaymentsBilling from "./pages/serviceProvider/PaymentsBilling";
 import ReportsAnalytics from "./pages/serviceProvider/ReportsAnalytics";
 import ActivityLogs from "./pages/serviceProvider/ActivityLogs";
 import AssignedTasks from "./pages/serviceProvider/AssignedTasks";
 import TaskDetails from "./pages/serviceProvider/TaskDetails";
 import Notifications from "./pages/serviceProvider/Notifications";
+import BookingManagement from "./pages/serviceProvider/BookingManagement";
+
+
 
 function App() {
   return (
@@ -36,12 +40,15 @@ function App() {
         {/* 🔹 SERVICE PROVIDER MODULE (NEW) */}
         <Route path="/service-provider" element={<ServiceProviderLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="add-space" element={<AddSpace />} />
           <Route path="tasks" element={<AssignedTasks />} />
           <Route path="tasks/:id" element={<TaskDetails />} />
           <Route path="payments" element={<PaymentsBilling />} />
           <Route path="reports" element={<ReportsAnalytics />} />
           <Route path="activity-logs" element={<ActivityLogs />} />
           <Route path="notifications" element={<Notifications />} />
+          <Route path="/service-provider/bookings" element={<BookingManagement />} />
+
         </Route>
 
       </Routes>

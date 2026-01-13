@@ -1,0 +1,92 @@
+.add-space-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.add-space-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.add-space-form label {
+  font-weight: 600;
+}
+
+.add-space-form input,
+.add-space-form textarea,
+.add-space-form select {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.add-space-form textarea {
+  resize: none;
+  height: 90px;
+}
+
+.checkbox-group label {
+  display: inline-block;
+  margin-right: 15px;
+  font-weight: normal;
+}
+
+.pricing-group input {
+  width: 32%;
+  margin-right: 2%;
+}
+
+.pricing-group input:last-child {
+  margin-right: 0;
+}
+
+.days-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.day-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.day-item input {
+  cursor: pointer;
+}
+
+
+.add-space-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.add-space-form button:hover {
+  background-color: #4338ca;
+}
+
+.space-list {
+  margin-top: 30px;
+}
+
+.space-list li {
+  background: #f4f4f4;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
