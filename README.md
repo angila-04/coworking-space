@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# SPACETRIX 🏢  
+### Modern Coworking Space Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SPACETRIX is a modern, enterprise-style coworking space platform inspired by real-world products like Awfis.  
+It provides a seamless booking experience for users and a management dashboard for admins.
 
-## Available Scripts
+This project focuses on **clean UI/UX**, **realistic booking flow**, and **scalable frontend architecture**.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 👤 User Module
+- Browse coworking spaces with rich UI
+- Filter spaces by location, type, and price
+- Quick View modal (no page reload)
+- Smooth booking flow with date, slots, and seats
+- Live dashboard insights (total bookings, spend, activity)
+- Booking history tracking
+- QR-based check-in system
+- Keyboard-accessible modal (ESC to close)
+- Fully responsive (mobile & desktop)
+- Enterprise-style dark UI inspired by Awfis
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🛠 Admin Module
+- Admin dashboard overview
+- Manage coworking spaces
+- Manage user bookings
+- Manage registered users
+- Handle service/support requests
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🧠 Project Highlights
+- Context API for global booking state management
+- Clean separation of Admin and User modules
+- Real-world UX patterns (loading, empty states, modals)
+- Accessibility considerations (keyboard support)
+- Scalable architecture ready for backend APIs
+- Professional UI polish and animations
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠 Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Frontend**
+- React
+- React Router DOM
+- Context API
+- Custom CSS (Enterprise UI)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Utilities**
+- QR Code generation (`qrcode.react`)
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 📦 How to Run the Project
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1️⃣ Clone the repository
+```bash
+git clone <your-repo-url>
