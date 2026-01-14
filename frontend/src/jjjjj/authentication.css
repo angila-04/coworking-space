@@ -1,0 +1,86 @@
+/* Container */
+.auth-container {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Title */
+.auth-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Toggle buttons (Register / Login, User / Provider) */
+.auth-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.auth-toggle button {
+  flex: 1;
+  padding: 10px;
+  background: #e5e7eb;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.auth-toggle button:hover {
+  background: #d1d5db;
+}
+
+/* Form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-form h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Inputs */
+.auth-form input,
+.auth-form textarea {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.auth-form input:focus,
+.auth-form textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* File input */
+.auth-form input[type="file"] {
+  border: none;
+}
+
+/* Submit button */
+.auth-form button {
+  margin-top: 10px;
+  padding: 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.auth-form button:hover {
+  background: #1d4ed8;
+}

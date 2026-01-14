@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 /* -------- ADMIN IMPORTS -------- */
 import AdminLayout from "./admin/AdminLayout";
 import AdminDashboard from "./admin/pages/AdminDashboard";
@@ -7,6 +6,7 @@ import ManageSpaces from "./admin/pages/ManageSpaces";
 import ManageBookings from "./admin/pages/ManageBookings";
 import ManageUsers from "./admin/pages/ManageUsers";
 import ServiceRequests from "./admin/pages/ServiceRequests";
+import Authentication from "./jjjjj/authentication.jsx";
 
 /* -------- USER IMPORTS -------- */
 import UserLayout from "./user/UserLayout";
@@ -26,6 +26,7 @@ function App() {
 
         {/* ================= ADMIN ROUTES ================= */}
         <Route path="/" element={<AdminLayout />}>
+        <Route path="/login" element={<Authentication />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="spaces" element={<ManageSpaces />} />
           <Route path="bookings" element={<ManageBookings />} />
@@ -51,3 +52,5 @@ function App() {
 }
 
 export default App;
+
+

@@ -26,3 +26,19 @@ yarn-error.log*
 node_modules/
 frontend/node_modules/
 
+# --------------------
+# Python / Backend
+# --------------------
+venv/
+backend/venv/
+
+__pycache__/
+backend/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Python environment files
+.env
+backend/.env
+backend/*.db
