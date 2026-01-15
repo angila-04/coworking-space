@@ -11,14 +11,15 @@ import Authentication from "./jjjjj/authentication.jsx";
 /* Service Provider imports */
 import ServiceProviderLayout from "./layouts/ServiceProviderLayout";
 import Dashboard from "./pages/serviceProvider/Dashboard";
+import MySpaces from "./pages/serviceProvider/MySpaces";
 import AddSpace from "./pages/serviceProvider/AddSpace";
-import PaymentsBilling from "./pages/serviceProvider/PaymentsBilling";
+import PaymentsBilling from "./pages/serviceProvider/Payments";
 import ReportsAnalytics from "./pages/serviceProvider/ReportsAnalytics";
 import ActivityLogs from "./pages/serviceProvider/ActivityLogs";
 import AssignedTasks from "./pages/serviceProvider/AssignedTasks";
 import TaskDetails from "./pages/serviceProvider/TaskDetails";
 import Notifications from "./pages/serviceProvider/Notifications";
-import BookingManagement from "./pages/serviceProvider/BookingManagement";
+import Bookings from "./pages/serviceProvider/Bookings";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/service-provider" element={<ServiceProviderLayout />}>
           <Route index element={<Navigate to="dashboard" />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="my-spaces" element={<MySpaces />} />         
           <Route path="add-space" element={<AddSpace />} />
           <Route path="tasks" element={<AssignedTasks />} />
           <Route path="tasks/:id" element={<TaskDetails />} />
@@ -49,7 +51,7 @@ function App() {
           <Route path="reports" element={<ReportsAnalytics />} />
           <Route path="activity-logs" element={<ActivityLogs />} />
           <Route path="notifications" element={<Notifications />} />
-          <Route path="bookings" element={<BookingManagement />} />
+          <Route path="bookings" element={<Bookings />} />
         </Route>
 
       </Routes>
