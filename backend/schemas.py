@@ -1,7 +1,9 @@
 from pydantic import BaseModel
 
 class RegisterSchema(BaseModel):
+    name: str
     email: str
+    mobile: str
     password: str
     role: str
 
