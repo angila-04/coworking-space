@@ -1,4 +1,4 @@
-/* Container */
+/* ================= CONTAINER ================= */
 .auth-container {
   max-width: 420px;
   margin: 60px auto;
@@ -9,13 +9,13 @@
   font-family: Arial, sans-serif;
 }
 
-/* Title */
+/* ================= TITLE ================= */
 .auth-container h1 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* Toggle buttons (Register / Login, User / Provider) */
+/* ================= TOGGLE BUTTONS ================= */
 .auth-toggle {
   display: flex;
   gap: 10px;
@@ -30,13 +30,20 @@
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
+  transition: background 0.2s ease;
 }
 
 .auth-toggle button:hover {
   background: #d1d5db;
 }
 
-/* Form */
+/* Active toggle */
+.auth-toggle button.active {
+  background: #2563eb;
+  color: white;
+}
+
+/* ================= FORM ================= */
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -48,7 +55,7 @@
   margin-bottom: 10px;
 }
 
-/* Inputs */
+/* ================= INPUTS ================= */
 .auth-form input,
 .auth-form textarea {
   padding: 10px;
@@ -68,7 +75,7 @@
   border: none;
 }
 
-/* Submit button */
+/* ================= SUBMIT BUTTON ================= */
 .auth-form button {
   margin-top: 10px;
   padding: 10px;
@@ -79,8 +86,42 @@
   cursor: pointer;
   font-size: 15px;
   font-weight: bold;
+  transition: background 0.2s ease;
 }
 
 .auth-form button:hover {
   background: #1d4ed8;
+}
+
+/* Disabled button */
+.auth-form button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* ================= MESSAGE STYLES ================= */
+.auth-error {
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 8px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-success {
+  color: #16a34a;
+  background: #dcfce7;
+  padding: 8px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 480px) {
+  .auth-container {
+    margin: 20px;
+    padding: 20px;
+  }
 }

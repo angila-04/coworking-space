@@ -20,3 +20,8 @@ class Booking(Base):
     time = Column(String)                    # booking time
     status = Column(String, default="Pending")  # Pending / Approved / Rejected
     created_at = Column(DateTime, default=datetime.utcnow)  
+    name = Column(String, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=False)
+    mobile = Column(String, nullable=False)
+    password = Column(String, nullable=False)
+    role = Column(String, nullable=False)

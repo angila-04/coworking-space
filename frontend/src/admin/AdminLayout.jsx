@@ -1,25 +1,32 @@
-import { Link, Outlet } from "react-router-dom";
 import "./admin.css";
+import { Link, Navigate, Outlet } from "react-router-dom";
 
-function AdminLayout() {
+export default function AdminLayout() {
+  const role = localStorage.getItem("role");
+
+  // 🔒 Protect admin routes
+  if (role !== "admin") {
+    return <Navigate to="/login" replace />;
+  }
+
   return (
-    <div style={{ display: "flex" }}>
+    <div className="admin-layout" style={{ display: "flex", minHeight: "100vh" }}>
       
+      {/* Sidebar */}
       <aside className="sidebar">
         <h2>Admin Panel</h2>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/spaces">Spaces</Link>
-        <Link to="/bookings">Bookings</Link>
-        <Link to="/users">Users</Link>
-        <Link to="/services">Services</Link>
+        <Link to="/admin/dashboard">Dashboard</Link>
+        <Link to="/admin/spaces">Spaces</Link>
+        <Link to="/admin/bookings">Bookings</Link>
+        <Link to="/admin/users">Users</Link>
+        <Link to="/admin/services">Services</Link>
       </aside>
 
-      <main className="main-content">
+      {/* Main Content */}
+      <main className="main-content" style={{ flex: 1, padding: "20px" }}>
         <Outlet />
       </main>
 
     </div>
   );
 }
-
-export default AdminLayout;

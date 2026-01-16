@@ -6,6 +6,7 @@ import ManageSpaces from "./admin/pages/ManageSpaces";
 import ManageBookings from "./admin/pages/ManageBookings";
 import ManageUsers from "./admin/pages/ManageUsers";
 import ServiceRequests from "./admin/pages/ServiceRequests";
+
 import Authentication from "./jjjjj/authentication.jsx";
 
 /* Service Provider imports */
@@ -30,8 +31,17 @@ function App() {
         <Route path="/login" element={<Authentication />} />
 
         {/* 🛠 ADMIN MODULE */}
-        <Route path="/" element={<AdminLayout />}>
+        <Route path="/" element={<AdminLayout />} />
           <Route index element={<Navigate to="dashboard" />} />
+        {/* Default route */}
+        <Route path="/" element={<Navigate to="/login" />} />
+
+        {/* Public Route */}
+        <Route path="/login" element={<Authentication />} />
+
+        {/* Admin Routes */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="spaces" element={<ManageSpaces />} />
           <Route path="bookings" element={<ManageBookings />} />
@@ -54,6 +64,8 @@ function App() {
           <Route path="bookings" element={<Bookings />} />
         </Route>
 
+        {/* Fallback */}
+        <Route path="*" element={<h2>Page Not Found</h2>} />
       </Routes>
     </BrowserRouter>
   );
