@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base
 from models import User
 from schemas import RegisterSchema, LoginSchema
+from routers import orders   
 
 # ================= DATABASE DEPENDENCY =================
 def get_db():
@@ -29,8 +30,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Create tables
+# ================= CREATE TABLES =================
 Base.metadata.create_all(bind=engine)
+
+# ================= ROUTERS =================
+app.include_router(orders.router) 
 
 # ================= REGISTER =================
 @app.post("/auth/register", status_code=201)
