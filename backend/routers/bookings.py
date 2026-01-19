@@ -1,5 +1,5 @@
-# from fastapi import APIRouter, Depends, HTTPException
-# from sqlalchemy.orm import Session
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
 # from typing import List
 
 # from database import get_db
@@ -7,7 +7,7 @@
 # from schemas import BookingCreate, BookingUpdateStatus, Booking as BookingSchema
 
 
-# router = APIRouter(prefix="/bookings", tags=["bookings"])
+router = APIRouter(prefix="/bookings", tags=["bookings"])
 
 # # GET all bookings
 # @router.get("/", response_model=List[BookingSchema])
@@ -47,8 +47,8 @@ from pydantic import BaseModel
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
-from activitylog import activity_logs, ActivityLog
-from payments import payments, Payment
+# from activitylog import activity_logs, ActivityLog
+# from payments import payments, Payment
 
 
 app = FastAPI()
@@ -118,36 +118,36 @@ def update_booking_status(booking_id: int, data: StatusUpdate):
             booking.status = data.status
 
             # ✅ ACTIVITY LOG (always)
-            activity_logs.append(
-                ActivityLog(
-                    id=len(activity_logs) + 1,
-                    action=f"BOOKING_{data.status.upper()}",
-                    message=f"You marked booking #{booking_id} as {data.status}",
-                    timestamp=datetime.now().strftime("%Y-%m-%d %I:%M %p")
-                )
-            )
+            # activity_logs.append(
+            #     ActivityLog(
+            #         id=len(activity_logs) + 1,
+            #         action=f"BOOKING_{data.status.upper()}",
+            #         message=f"You marked booking #{booking_id} as {data.status}",
+            #         timestamp=datetime.now().strftime("%Y-%m-%d %I:%M %p")
+            #     )
+            # )
 
             # ✅ PAYMENT (only when completed)
-            if data.status.lower() == "completed":
-                payments.append(
-                    Payment(
-                        id=len(payments) + 1,
-                        booking_id=booking_id,
-                        amount=2000,  # example amount
-                        status="Paid",
-                        date=datetime.now().strftime("%Y-%m-%d")
-                    )
-                )
+            # if data.status.lower() == "completed":
+            #     payments.append(
+            #         Payment(
+            #             id=len(payments) + 1,
+            #             booking_id=booking_id,
+            #             amount=2000,  # example amount
+            #             status="Paid",
+            #             date=datetime.now().strftime("%Y-%m-%d")
+            #         )
+            #     )
 
                 # ✅ PAYMENT ACTIVITY LOG
-                activity_logs.append(
-                    ActivityLog(
-                        id=len(activity_logs) + 1,
-                        action="PAYMENT_RECEIVED",
-                        message=f"Payment received for booking #{booking_id}",
-                        timestamp=datetime.now().strftime("%Y-%m-%d %I:%M %p")
-                    )
-                )
+                # activity_logs.append(
+                #     ActivityLog(
+                #         id=len(activity_logs) + 1,
+                #         action="PAYMENT_RECEIVED",
+                #         message=f"Payment received for booking #{booking_id}",
+                #         timestamp=datetime.now().strftime("%Y-%m-%d %I:%M %p")
+                #     )
+                # )
 
             return {
                 "message": "Status updated successfully",

@@ -3,6 +3,7 @@ from database import engine, Base
 from routers.auth import router as auth_router
 from routers import bookings
 from routers.service_provider import router as sp_router
+from routers import spaces
 
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,6 +12,8 @@ from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base
 from models import User
 from schemas import RegisterSchema, LoginSchema
+
+
 
 # ================= DATABASE DEPENDENCY =================
 def get_db():
@@ -22,6 +25,7 @@ def get_db():
 
 # ================= FASTAPI APP =================
 app = FastAPI(title="Coworking Space API")
+
 
 # ================= CORS =================
 app.add_middleware(
@@ -37,6 +41,7 @@ app.add_middleware(
 
 # Create tables
 Base.metadata.create_all(bind=engine)
+
 
 # ================= REGISTER =================
 @app.post("/auth/register", status_code=201)
@@ -58,9 +63,14 @@ def register_user(user: RegisterSchema, db: Session = Depends(get_db)):
 
     return {"message": f"{user.role} registered successfully"}
 
+
+# ================= ROUTERS =================
 app.include_router(auth_router)
 app.include_router(sp_router)
 app.include_router(bookings.router)
+app.include_router(spaces.router)
+
+
 # ================= LOGIN =================
 @app.post("/auth/login")
 def login_user(user: LoginSchema, db: Session = Depends(get_db)):
