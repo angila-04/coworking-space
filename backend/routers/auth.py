@@ -1,10 +1,14 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException,Header
 from sqlalchemy.orm import Session
 from database import SessionLocal
 from models import User
 from schemas import RegisterSchema, LoginSchema
+from fastapi.security import OAuth2PasswordBearer
+
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
+
+
 
 # DB dependency
 def get_db():
@@ -13,6 +17,21 @@ def get_db():
         yield db
     finally:
         db.close()
+
+def get_current_user(
+    x_user_id: int = Header(None),
+    x_role: str = Header(None)
+):
+    if x_user_id is None or x_role is None:
+        raise HTTPException(
+            status_code=401,
+            detail="User not authenticated"
+        )
+
+    return {
+        "id": x_user_id,
+        "role": x_role
+    }
 
 # ================= REGISTER =================
 @router.post("/register")

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import date, time, datetime
 from typing import List, Optional
 
 
@@ -16,6 +16,8 @@ class LoginSchema(BaseModel):
     email: str
     password: str
 
+
+# ===================== ORDER SCHEMAS =====================
 class OrderCreate(BaseModel):
     space_id: int
     amount: float
@@ -27,25 +29,38 @@ class OrderResponse(BaseModel):
     amount: float
     booking_time: datetime
 
+
+
 # -------------------- BOOKING --------------------
 class BookingBase(BaseModel):
+    user_id: int
+    provider_id: int
+    space_id: int
     user_name: str
     space_name: str
-    date: str
-    time: str
-
+    booking_date: date
+    start_time: time
+    end_time: time
+    total_amount: float
 
 class BookingCreate(BookingBase):
-    pass
+    pass  # For creating a new booking
 
+class BookingResponse(BookingBase):
+    id: int
+    booking_code: str
+    payment_status: Optional[str] = "pending"   # pending | paid | failed
+    booking_status: Optional[str] = "pending"   # pending | confirmed | completed | cancelled
+    created_at: datetime
+    updated_at: Optional[datetime]
+
+    class Config:
+        orm_mode = True
 
 class BookingUpdateStatus(BaseModel):
-    status: str
+    booking_status: str  # pending | confirmed | completed | cancelled
 
 
-class Booking(BookingBase):
-    id: int
-    status: str
 
 
 # -------------------- SPACE (CREATE / UPDATE) --------------------
