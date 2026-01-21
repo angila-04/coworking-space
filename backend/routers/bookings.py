@@ -1,10 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from datetime import date
+from typing import List
 
 from database import get_db
 from models import Booking
 from schemas import BookingCreate, BookingUpdateStatus
+from schemas import BookingResponse
+
 
 router = APIRouter(
     prefix="/bookings",

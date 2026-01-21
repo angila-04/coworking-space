@@ -17,20 +17,6 @@ class LoginSchema(BaseModel):
     password: str
 
 
-# ===================== ORDER SCHEMAS =====================
-class OrderCreate(BaseModel):
-    space_id: int
-    amount: float
-
-class OrderResponse(BaseModel):
-    id: int
-    user_id: int
-    space_id: int
-    amount: float
-    booking_time: datetime
-
-
-
 # -------------------- BOOKING --------------------
 class BookingBase(BaseModel):
     user_id: int
