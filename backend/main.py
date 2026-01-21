@@ -12,7 +12,7 @@ from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base
 from models import User
 from schemas import RegisterSchema, LoginSchema
-from routers import orders   
+from routers import bookings  
 
 
 
@@ -86,3 +86,7 @@ def login_user(user: LoginSchema, db: Session = Depends(get_db)):
         "role": db_user.role,
         "name": db_user.name
     }
+
+app.include_router(bookings.router)
+
+

@@ -67,3 +67,21 @@ def update_booking_status(
     db.commit()
 
     return {"message": "Booking status updated"}
+
+@router.get("/provider/{provider_id}", response_model=List[BookingResponse])
+def get_bookings_for_provider(provider_id: int, db: Session = Depends(get_db)):
+    bookings = db.query(Booking).filter(Booking.provider_id == provider_id).all()
+
+    if not bookings:
+        raise HTTPException(status_code=404, detail="No bookings found for this provider")
+
+    return bookings
+
+@router.get("/user/{user_id}", response_model=List[BookingResponse])
+def get_bookings_for_user(user_id: int, db: Session = Depends(get_db)):
+    bookings = db.query(Booking).filter(Booking.user_id == user_id).all()
+
+    if not bookings:
+        raise HTTPException(status_code=404, detail="No bookings found for this user")
+
+    return bookings

@@ -137,3 +137,25 @@ class SpaceImageResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class BookingResponse(BaseModel):
+    id: int
+    booking_code: str
+    user_id: int
+    user_name: str
+    provider_id: int
+    space_id: int
+    space_name: str
+    booking_date: date
+    start_time: time
+    end_time: time
+    total_amount: float
+    payment_status: str
+    booking_status: str
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+

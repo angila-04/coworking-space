@@ -64,3 +64,5 @@ def login(data: LoginSchema, db: Session = Depends(get_db)):
         "role": user.role,
         "name": user.name
     }
+
+

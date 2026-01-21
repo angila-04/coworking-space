@@ -10,7 +10,7 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=True)      # ✅ ADD
+    name = Column(String, nullable=True)      
     email = Column(String, unique=True, index=True)
     mobile = Column(String, nullable=True)
     password = Column(String)
@@ -69,9 +69,14 @@ class SpaceImage(Base):
 # -------------------- ORDER --------------------
 class Order(Base):
     __tablename__ = "orders"
+class SpaceImage(Base):
+    __tablename__ = "space_images"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     space_id = Column(Integer, ForeignKey("spaces.id"), nullable=False)
-    booking_time = Column(DateTime(timezone=True), server_default=func.now())
-    amount = Column(Float, nullable=False)
+    image_url = Column(String, nullable=False)
+    space = relationship("Space", backref="images")
+
+
+
+

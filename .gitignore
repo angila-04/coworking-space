@@ -42,3 +42,4 @@ backend/__pycache__/
 .env
 backend/.env
 backend/*.db
+
