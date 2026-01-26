@@ -156,17 +156,29 @@ function LoginForm({ navigate }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const res = await loginUser(form);
 
-      // Store role & name in localStorage
-      localStorage.setItem("role", res.data.role);
-      localStorage.setItem("name", res.data.name);
+      const { id, name, role } = res.data;
 
-      // Navigate based on role
-      if (res.data.role === "admin") navigate("/admin");
-      else if (res.data.role === "service_provider") navigate("/provider");
-      else navigate("/dashboard");
+      // ✅ Store auth info
+      localStorage.setItem("userId", id);
+      localStorage.setItem("role", role);
+      localStorage.setItem("name", name);
+
+      // ✅ Role-based redirect
+      if (role === "admin") {
+        navigate("/admin/dashboard");
+      }
+      else if (role === "service_provider") {
+        navigate(`/service-provider/${id}/dashboard`);
+      }
+      else {
+        // 👤 USER
+        navigate(`/user/${id}/dashboard`);
+      }
+
     } catch (err) {
       alert("Invalid email or password ❌");
     }
@@ -175,8 +187,18 @@ function LoginForm({ navigate }) {
   return (
     <form onSubmit={handleSubmit} className="auth-form">
       <h3>Login</h3>
-      <input name="email" type="email" placeholder="Email" onChange={handleChange} />
-      <input name="password" type="password" placeholder="Password" onChange={handleChange} />
+      <input
+        name="email"
+        type="email"
+        placeholder="Email"
+        onChange={handleChange}
+      />
+      <input
+        name="password"
+        type="password"
+        placeholder="Password"
+        onChange={handleChange}
+      />
       <button type="submit">Login</button>
     </form>
   );

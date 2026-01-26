@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Date, Time,Boolean
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Date, Time, Text, Boolean
 from sqlalchemy.orm import relationship
 from database import Base
 from datetime import datetime
@@ -14,10 +14,8 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     mobile = Column(String, nullable=True)
     password = Column(String)
-    role = Column(String)       # "admin" , "user" , "provider"
-
-    # orders = relationship("Order", back_populates="user")
-
+    role = Column(String)
+    # orders = relationship("Booking", back_populates="user")
 
 # -------------------- SPACE --------------------
 class Space(Base):
@@ -43,6 +41,15 @@ class Space(Base):
 
     provider_id = Column(Integer,ForeignKey("users.id"), nullable=False)
     images = relationship("SpaceImage", back_populates="space")
+    email = Column(String, unique=True, index=True, nullable=False)
+    mobile = Column(String, nullable=False)
+
+    status = Column(String, default="pending")  # pending | approved | rejected
+    created_at = Column(DateTime, default=datetime.utcnow)
+    images = relationship("SpaceImage", back_populates="space")
+
+
+   
 
 
 # -------------------- SPACE IMAGE --------------------
@@ -79,9 +86,33 @@ class Booking(Base):
 
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    # user = relationship("User", back_populates="orders")    
 
     user = relationship("User", foreign_keys=[user_id])
     provider = relationship("User", foreign_keys=[provider_id])
     space = relationship("Space")
 
 
+
+class Enquiry(Base):
+    __tablename__ = "enquiries"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    email = Column(String)
+    phone = Column(String)
+    type = Column(String)  # user, service_provider
+    subject = Column(String)
+    message = Column(Text)
+    status = Column(String, default="pending")  # pending, responded
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class Notification(Base):
+    __tablename__ = "notifications"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    type = Column(String)  # space, enquiry, provider
+    message = Column(String)
+    read = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
