@@ -1,7 +1,9 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Date, Time
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Date, Time,Boolean
 from sqlalchemy.orm import relationship
 from database import Base
 from datetime import datetime
+from sqlalchemy.sql import func
+
 
 # -------------------- USER --------------------
 class User(Base):
@@ -12,9 +14,9 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     mobile = Column(String, nullable=True)
     password = Column(String)
-    role = Column(String)
+    role = Column(String)       # "admin" , "user" , "provider"
 
-    orders = relationship("Order", back_populates="user")
+    # orders = relationship("Order", back_populates="user")
 
 
 # -------------------- SPACE --------------------
@@ -23,12 +25,24 @@ class Space(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
-    email = Column(String, unique=True, index=True, nullable=False)
-    mobile = Column(String, nullable=False)
-    password = Column(String, nullable=False)
-    role = Column(String, nullable=False)
+    location = Column(String, nullable=False)
+    space_type = Column(String, nullable=False)
+    capacity = Column(Integer, nullable=False)
+    description = Column(String)
+    amenities = Column(String)
+
+    hourly_rate = Column(Float)
+    daily_rate = Column(Float)
+    weekly_rate = Column(Float)
+
+    available_start = Column(Time)
+    available_end = Column(Time)
+    available_days = Column(String)
+
+    is_available = Column(Boolean, default=True)  # ADD THIS LINE
+
+    provider_id = Column(Integer,ForeignKey("users.id"), nullable=False)
     images = relationship("SpaceImage", back_populates="space")
-   
 
 
 # -------------------- SPACE IMAGE --------------------
@@ -48,11 +62,11 @@ class Booking(Base):
     id = Column(Integer, primary_key=True, index=True)
     booking_code = Column(String, unique=True, index=True)
 
-    user_id = Column(Integer, nullable=False)
+    user_id = Column(Integer,ForeignKey("users.id"), nullable=False)
     user_name = Column(String, nullable=False)
 
-    provider_id = Column(Integer, nullable=False)
-    space_id = Column(Integer, nullable=False)
+    provider_id = Column(Integer,ForeignKey("users.id"), nullable=False)
+    space_id = Column(Integer,ForeignKey("spaces.id"), nullable=False)
     space_name = Column(String, nullable=False)
 
     booking_date = Column(Date, nullable=False)
@@ -60,11 +74,14 @@ class Booking(Base):
     end_time = Column(Time, nullable=False)
 
     total_amount = Column(Float, nullable=False)
-    payment_status = Column(String, default="pending")
+    payment_status = Column(String, default="unpaid")
     booking_status = Column(String, default="pending")
 
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
+    user = relationship("User", foreign_keys=[user_id])
+    provider = relationship("User", foreign_keys=[provider_id])
+    space = relationship("Space")
 
 

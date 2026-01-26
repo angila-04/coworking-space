@@ -63,9 +63,12 @@ class SpaceCreate(BaseModel):
     daily_rate: Optional[float] = None
     weekly_rate: Optional[float] = None
 
-    availability_start: Optional[str] = None
-    availability_end: Optional[str] = None
-    availability_days: List[str]
+    available_start: Optional[str] = None
+    available_end: Optional[str] = None
+    available_days: List[str]
+
+    provider_id: int   
+
 
 
 # -------------------- SPACE RESPONSE (POST) --------------------
@@ -81,8 +84,12 @@ class SpaceListResponse(BaseModel):
     hourly_rate: Optional[float]
     daily_rate: Optional[float]
     weekly_rate: Optional[float]
+    price: float
     amenities: List[str]
-
+    is_available: bool
+    images: List[str]
+    main_image: Optional[str]
+    
     class Config:
         from_attributes = True
 
@@ -102,9 +109,9 @@ class SpaceDetailResponse(BaseModel):
     daily_rate: Optional[float]
     weekly_rate: Optional[float]
 
-    availability_start: Optional[str]
-    availability_end: Optional[str]
-    availability_days: List[str]
+    available_start: Optional[str]
+    available_end: Optional[str]
+    available_days: List[str]
 
     class Config:
         from_attributes = True
@@ -143,5 +150,6 @@ class BookingResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
 
 

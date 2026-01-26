@@ -4,14 +4,16 @@ from routers.auth import router as auth_router
 from routers.service_provider import router as sp_router
 from routers import spaces
 
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from database import SessionLocal, engine, Base
 from models import User
 from schemas import RegisterSchema, LoginSchema
-from routers import bookings  
+from routers import bookings 
+from routers import notifications
+
 
 
 
@@ -42,11 +44,6 @@ app.add_middleware(
 # ================= CREATE TABLES =================
 Base.metadata.create_all(bind=engine)
 
-# ================= ROUTERS =================
-from routers import bookings
-
-app.include_router(bookings.router)
-
 # ================= REGISTER =================
 @app.post("/auth/register", status_code=201)
 def register_user(user: RegisterSchema, db: Session = Depends(get_db)):
@@ -75,6 +72,7 @@ app.include_router(bookings.router)
 app.include_router(spaces.router)
 
 
+
 # ================= LOGIN =================
 @app.post("/auth/login")
 def login_user(user: LoginSchema, db: Session = Depends(get_db)):
@@ -88,6 +86,5 @@ def login_user(user: LoginSchema, db: Session = Depends(get_db)):
         "name": db_user.name
     }
 
-app.include_router(bookings.router)
 
 
