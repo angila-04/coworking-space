@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from datetime import date
+from datetime import datetime
 from typing import List
 
 from database import get_db
@@ -21,22 +21,33 @@ def create_booking(
     db: Session = Depends(get_db)
 ):
     new_booking = Booking(
+        booking_code=f"BK-{int(datetime.utcnow().timestamp())}",
+
+        user_id=booking.user_id,
         user_name=booking.user_name,
-        space_name=booking.space_name,
-        date=booking.date,
-        time_slot=booking.time,
-        number_of_people=booking.number_of_people,
+
         provider_id=booking.provider_id,
-        status="pending",
-        payment_status="pending"
+        space_id=booking.space_id,
+        space_name=booking.space_name,
+
+        booking_date=booking.booking_date,
+        start_time=booking.start_time,
+        end_time=booking.end_time,
+
+        total_amount=booking.total_amount,
+
+        booking_status="pending",   # 👈 USER JUST REQUESTED
+        payment_status="unpaid"
     )
 
     db.add(new_booking)
     db.commit()
     db.refresh(new_booking)
 
-    return new_booking
-
+    return {
+        "message": "Booking request sent",
+        "booking_id": new_booking.id
+    }
 
 # ---------------- GET BOOKINGS FOR PROVIDER ----------------
 @router.get("/provider/{provider_id}")
@@ -66,7 +77,7 @@ def update_booking_status(
     if status not in ["pending", "approved", "rejected", "cancelled"]:
         raise HTTPException(status_code=400, detail="Invalid status")
 
-    booking.status = status
+    booking.booking_status = status
     db.commit()
 
     return {"message": "Booking status updated"}
